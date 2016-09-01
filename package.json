@@ -1,0 +1,25 @@
+{
+  "name": "erbium",
+  "version": "1.0.0",
+  "description": "Erbium - JavaScript Components",
+  "main": "index.js",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexanderElias/erbium.git"
+  },
+  "keywords": [
+    "components",
+    "components",
+    "erbium",
+    "web",
+    "javascript"
+  ],
+  "author": "Alexander Elias",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/AlexanderElias/erbium/issues"
+  },
+  "homepage": "https://github.com/AlexanderElias/erbium#readme"
+}
