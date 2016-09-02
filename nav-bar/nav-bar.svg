@@ -1,5 +1,7 @@
-<svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-	<path class="nav-path" d="M-.016 9.945h100v13.622h-100z"/>
-	<path class="nav-path" d="M-.016 44.19h100v13.62h-100z"/>
-	<path class="nav-path" d="M-.016 77.433h100v13.622h-100z"/>
+<svg class="nav-bg" viewBox="0 0 100 100">
+	<g>
+		<path class="nav-icon" d="M0 9 h100 v15 h-100 z"/>
+		<path class="nav-icon" d="M0 44 h100 v15 h-100 z"/>
+		<path class="nav-icon" d="M0 77 h100 v15 h-100 z"/>
+	</g>
 </svg>
