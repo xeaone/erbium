@@ -58,7 +58,6 @@
 		.nav-bar ul ul > li {
 			display: block;
 		}
-		/* nav-list-all */
 		.nav-bar a+ul {
 			transform: translate3d(0%,-50%,0) scale3d(1,0,1);
 			-o-transform: translate3d(0%,-50%,0) scale3d(1,0,1);
@@ -66,7 +65,6 @@
 			-moz-transform: translate3d(0%,-50%,0) scale3d(1,0,1);
 			-webkit-transform: translate3d(0%,-50%,0) scale3d(1,0,1);
 		}
-		/* nav-list-all.active */
 		.nav-bar li.active > a+ul {
 			transform: translate3d(0%,0%,0) scale3d(1,1,1);
 			-o-transform: translate3d(0%,0%,0) scale3d(1,1,1);
@@ -81,6 +79,7 @@
 		}
 		.nav-bar > svg {
 			z-index: 1;
+			width: 40px;
 			height: 40px;
 			display: block;
 			position: relative;
@@ -94,18 +93,14 @@
 			padding-left: 0;
 			padding-right: 0;
 		}
-		/* nav-list-first */
 		.nav-bar > ul {
 			max-height: 0vh;
 			position: relative;
 		}
-		/* nav-list-first.active */
 		.nav-bar > ul.active {
 			max-height: 100vh;
 		}
-		/* nav-list-all */
 		.nav-bar a+ul {
-			/*max-width: 0vw;*/
 			top: 0px;
 			right: 0px;
 			height: 100%;
@@ -116,9 +111,7 @@
 			-moz-transform: translate3d(100%,00%,0);
 			-webkit-transform: translate3d(100%,0%,0);
 		}
-		/* nav-list-all.active */
 		.nav-bar li.active > a+ul {
-			/*max-width: 100vw;*/
 			transform: translate3d(0%,0%,0);
 			-o-transform: translate3d(0%,0%,0);
 			-ms-transform: translate3d(0%,0%,0);
@@ -139,26 +132,26 @@
 	.nav-bar > svg:hover path:nth-child(3) {
 		transform: translate3d(0px, -5px, 0);
 	}
-	.nav-top-rotate {
-		transform: rotate(45deg) translate3d(21.25px, -7.5px, 0) !important;
-		transform: -o-rotate(45deg) -o-translate3d(21.25px, -7.5px, 0) !important;
-		transform: -ms-rotate(45deg) -ms-translate3d(21.25px, -7.5px, 0) !important;
-		transform: -moz-rotate(45deg) -moz-translate3d(21.25px, -7.5px, 0) !important;
-		transform: -webkit-rotate(45deg) -webkit-translate3d(21.25px, -7.5px, 0) !important;
+	.nav-bar.active > svg > g > path:nth-child(1) {
+		transform: rotate(45deg) translate3d(21.25px, -7.5px, 0);
+		transform: -o-rotate(45deg) -o-translate3d(21.25px, -7.5px, 0);
+		transform: -ms-rotate(45deg) -ms-translate3d(21.25px, -7.5px, 0);
+		transform: -moz-rotate(45deg) -moz-translate3d(21.25px, -7.5px, 0);
+		transform: -webkit-rotate(45deg) -webkit-translate3d(21.25px, -7.5px, 0);
 	}
-	.nav-middle-rotate {
-		transform: rotate(45deg) translate3d(21.25px, -50px, 0) !important;
-		transform: -o-rotate(45deg) -o-translate3d(21.25px, -50px, 0) !important;
-		transform: -ms-rotate(45deg) ms-translate3d(21.25px, -50px, 0) !important;
-		transform: -moz-rotate(45deg) -moz-translate3d(21.25px, -50px, 0) !important;
-		transform: -webkit-rotate(45deg) -webkit-translate3d(21.25px, -50px, 0) !important;
+	.nav-bar.active > svg > g > path:nth-child(2) {
+		transform: rotate(45deg) translate3d(21.25px, -50px, 0);
+		transform: -o-rotate(45deg) -o-translate3d(21.25px, -50px, 0);
+		transform: -ms-rotate(45deg) ms-translate3d(21.25px, -50px, 0);
+		transform: -moz-rotate(45deg) -moz-translate3d(21.25px, -50px, 0);
+		transform: -webkit-rotate(45deg) -webkit-translate3d(21.25px, -50px, 0);
 	}
-	.nav-bottom-rotate {
-		transform: rotate(-45deg) translate3d(-50px, -21.25px, 0) !important;
-		transform: -o-rotate(-45deg) -o-translate3d(-50px, -21.25px, 0) !important;
-		transform: -ms-rotate(-45deg) -ms-translate3d(-50px, -21.25px, 0) !important;
-		transform: -moz-rotate(-45deg) -moz-translate3d(-50px, -21.25px, 0) !important;
-		transform: -webkit-rotate(-45deg) -webkit-translate3d(-50px, -21.25px, 0) !important;
+	.nav-bar.active > svg > g > path:nth-child(3) {
+		transform: rotate(-45deg) translate3d(-50px, -21.25px, 0);
+		transform: -o-rotate(-45deg) -o-translate3d(-50px, -21.25px, 0);
+		transform: -ms-rotate(-45deg) -ms-translate3d(-50px, -21.25px, 0);
+		transform: -moz-rotate(-45deg) -moz-translate3d(-50px, -21.25px, 0);
+		transform: -webkit-rotate(-45deg) -webkit-translate3d(-50px, -21.25px, 0);
 	}
 	`;
 
@@ -217,9 +210,7 @@
 
 		navSvg.addEventListener('click', function () {
 			navListFirst.classList.toggle('active');
-			navTop.classList.toggle('nav-top-rotate');
-			navMiddle.classList.toggle('nav-middle-rotate');
-			navBottom.classList.toggle('nav-bottom-rotate');
+			navBar.classList.toggle('active');
 		});
 
 		navBar.insertBefore(navSvg, navBar.firstElementChild);
