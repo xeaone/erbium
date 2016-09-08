@@ -11,9 +11,6 @@
 		padding: 0;
 		transition: all 300ms ease-in-out;
 	}
-	.nav-bar > svg {
-		cursor: pointer;
-	}
 	.nav-bar > ul {
 		width: 100%;
 		list-style: none;
@@ -43,13 +40,18 @@
 		font-weight: bold;
 	}
 	@media screen and (min-width: 940px) {
-		.nav-bar > svg {
-			height: 0;
-			padding: 0;
-			display: block;
+		.nav-bar > .nav-tool {
+			height: 0px;
+			padding: 0px;
+		}
+		.nav-bar > .nav-tool > .nav-icon-wrap  {
+			transform: translate3d(-150%, 0%, 0);
 		}
 		.nav-bar li {
 			position: relative;
+		}
+		.nav-bar > ul {
+			max-height: 1000px;
 		}
 		.nav-bar ul ul > li {
 			display: block;
@@ -65,13 +67,13 @@
 		.nav-bar {
 			overflow: hidden;
 		}
-		.nav-bar > svg {
-			z-index: 1;
-			width: 40px;
-			height: 40px;
-			display: block;
-			position: relative;
-			padding: 16px calc(100% - 56px) 16px 16px;
+		.nav-bar > .nav-tool {
+			width: 100%;
+			height: 50px;
+			padding: 16px;
+		}
+		.nav-bar > .nav-tool > .nav-icon-wrap {
+			transform: translate3d(0%, 0%, 0);
 		}
 		.nav-bar li, .nav-bar a {
 			display: block;
@@ -82,11 +84,11 @@
 			padding-right: 0;
 		}
 		.nav-bar > ul {
-			max-height: 0vh;
+			max-height: 0px;
 			position: relative;
 		}
 		.nav-bar > ul.active {
-			max-height: 100vh;
+			max-height: 1000px;
 		}
 		.nav-bar a+ul {
 			top: 0px;
@@ -99,23 +101,41 @@
 			transform: translate3d(0%,0%,0);
 		}
 	}
-	.nav-bar > svg > g > path {
+	.nav-tool {
+		display: block;
+	}
+	.nav-icon-wrap  {
+		height: 50px;
+		width: 50px;
+		cursor: pointer;
+		position: relative;
+		display: inline-block;
+	}
+	.nav-icon {
+		width: 100%;
+		height: 15%;
+		background: black;
+		position: absolute;
 		transform-origin: 0 0 0;
 	}
-	.nav-bar > svg:hover path:nth-child(1) {
-		transform: translate3d(0px, 5px, 0);
+	.nav-icon:nth-child(1) {
+		top: 10%;
 	}
-	.nav-bar > svg:hover path:nth-child(3) {
-		transform: translate3d(0px, -5px, 0);
+	.nav-icon:nth-child(2) {
+		top: 42.5%;
 	}
-	.nav-bar.active > svg > g > path:nth-child(1) {
-		transform: matrix(0.7, 0.7, -0.7, 0.7, 27.3, 2.7);
+	.nav-icon:nth-child(3) {
+		top: 75%;
 	}
-	.nav-bar.active > svg > g > path:nth-child(2) {
-		transform: matrix(0.7, 0.7, -0.7, 0.7, 50, -20);
+	.nav-bar.active .nav-icon:nth-child(1) {
+		height: 13%;
+		transform: rotate(45deg) translate3d(13%, -112%, 0);
 	}
-	.nav-bar.active > svg > g > path:nth-child(3) {
-		transform: matrix(0.7, -0.7, 0.7, 0.7, -42, 27.3);
+	.nav-bar.active .nav-icon:nth-child(2) {
+		transform: rotate(45deg) translate3d(-10%, -250%, 0);
+	}
+	.nav-bar.active .nav-icon:nth-child(3) {
+		transform: rotate(-45deg) translate3d(3%, 67%, 0);
 	}
 	`;
 
@@ -150,46 +170,24 @@
 		/*
 			icon
 		*/
-		var navSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-		navSvg.setAttribute('class', 'nav-bg');
-		navSvg.setAttribute('viewBox', '0 0 100 100');
+		var navTool = document.createElement('div');
+		navTool.setAttribute('class', 'nav-tool');
 
-		var navG = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-		navSvg.appendChild(navG);
+		var navIconWrap = document.createElement('div');
+		navIconWrap.setAttribute('class', 'nav-icon-wrap');
 
-		var navTop = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-		navTop.setAttribute('class', 'nav-icon');
-		navTop.setAttribute('d', 'M0 10 h100 v15 h-100 z');
-		navG.appendChild(navTop);
+		var navIcon = document.createElement('div');
+		navIcon.setAttribute('class', 'nav-icon');
 
-		var navMiddle = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-		navMiddle.setAttribute('class', 'nav-icon');
-		navMiddle.setAttribute('d', 'M0 42.5 h100 v15 h-100 z');
-		navG.appendChild(navMiddle);
+		for (var i = 0; i < 3; i++) navIconWrap.appendChild(navIcon.cloneNode(false));
 
-		var navBottom = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-		navBottom.setAttribute('class', 'nav-icon');
-		navBottom.setAttribute('d', 'M0 75 h100 v15 h-100 z');
-		navG.appendChild(navBottom);
-
-		navSvg.addEventListener('click', function () {
+		navIconWrap.addEventListener('click', function () {
 			navListFirst.classList.toggle('active');
-			var isActive = navBar.classList.toggle('active');
-
-			if (isIeOrEdge()) {
-				if (isActive) {
-					navTop.setAttribute('transform', 'matrix(0.7, 0.7, -0.7, 0.7, 27.3, 2.7)');
-					navMiddle.setAttribute('transform', 'matrix(0.7, 0.7, -0.7, 0.7, 50, -20)');
-					navBottom.setAttribute('transform', 'matrix(0.7, -0.7, 0.7, 0.7, -42, 27.3)');
-				} else {
-					navTop.setAttribute('transform', '');
-					navMiddle.setAttribute('transform', '');
-					navBottom.setAttribute('transform', '');
-				}
-			}
+			navBar.classList.toggle('active');
 		});
 
-		navBar.insertBefore(navSvg, navBar.firstElementChild);
+		navTool.appendChild(navIconWrap);
+		navBar.insertBefore(navTool, navBar.firstElementChild);
 
 		/*
 			main
@@ -212,14 +210,6 @@
 			navListAll[i].previousElementSibling.addEventListener('click', function() {
 				this.parentElement.classList.toggle('active');
 			});
-		}
-
-		/*
-			helpers
-		*/
-		function isIeOrEdge () {
-			var isIe = /*@cc_on!@*/false || !!document.documentMode;
-			return isIe || !!window.StyleMedia;
 		}
 	});
 

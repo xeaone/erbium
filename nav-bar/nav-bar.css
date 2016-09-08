@@ -7,9 +7,6 @@
 	padding: 0;
 	transition: all 300ms ease-in-out;
 }
-.nav-bar > svg {
-	cursor: pointer;
-}
 .nav-bar > ul {
 	width: 100%;
 	list-style: none;
@@ -39,13 +36,18 @@
 	font-weight: bold;
 }
 @media screen and (min-width: 940px) {
-	.nav-bar > svg {
-		height: 0;
-		padding: 0;
-		display: block;
+	.nav-bar > .nav-tool {
+		height: 0px;
+		padding: 0px;
+	}
+	.nav-bar > .nav-tool > .nav-icon-wrap  {
+		transform: translate3d(-150%, 0%, 0);
 	}
 	.nav-bar li {
 		position: relative;
+	}
+	.nav-bar > ul {
+		max-height: 1000px;
 	}
 	.nav-bar ul ul > li {
 		display: block;
@@ -61,13 +63,13 @@
 	.nav-bar {
 		overflow: hidden;
 	}
-	.nav-bar > svg {
-		z-index: 1;
-		width: 40px;
-		height: 40px;
-		display: block;
-		position: relative;
-		padding: 16px calc(100% - 56px) 16px 16px;
+	.nav-bar > .nav-tool {
+		width: 100%;
+		height: 50px;
+		padding: 16px;
+	}
+	.nav-bar > .nav-tool > .nav-icon-wrap {
+		transform: translate3d(0%, 0%, 0);
 	}
 	.nav-bar li, .nav-bar a {
 		display: block;
@@ -78,11 +80,11 @@
 		padding-right: 0;
 	}
 	.nav-bar > ul {
-		max-height: 0vh;
+		max-height: 0px;
 		position: relative;
 	}
 	.nav-bar > ul.active {
-		max-height: 100vh;
+		max-height: 1000px;
 	}
 	.nav-bar a+ul {
 		top: 0px;
@@ -95,21 +97,39 @@
 		transform: translate3d(0%,0%,0);
 	}
 }
-.nav-bar > svg > g > path {
+.nav-tool {
+	display: block;
+}
+.nav-icon-wrap  {
+	height: 50px;
+	width: 50px;
+	cursor: pointer;
+	position: relative;
+	display: inline-block;
+}
+.nav-icon {
+	width: 100%;
+	height: 15%;
+	background: black;
+	position: absolute;
 	transform-origin: 0 0 0;
 }
-.nav-bar > svg:hover path:nth-child(1) {
-	transform: translate3d(0px, 5px, 0);
+.nav-icon:nth-child(1) {
+	top: 10%;
 }
-.nav-bar > svg:hover path:nth-child(3) {
-	transform: translate3d(0px, -5px, 0);
+.nav-icon:nth-child(2) {
+	top: 42.5%;
 }
-.nav-bar.active > svg > g > path:nth-child(1) {
-	transform: matrix(0.7, 0.7, -0.7, 0.7, 27.3, 2.7);
+.nav-icon:nth-child(3) {
+	top: 75%;
 }
-.nav-bar.active > svg > g > path:nth-child(2) {
-	transform: matrix(0.7, 0.7, -0.7, 0.7, 50, -20);
+.nav-bar.active .nav-icon:nth-child(1) {
+	height: 13%;
+	transform: rotate(45deg) translate3d(13%, -112%, 0);
 }
-.nav-bar.active > svg > g > path:nth-child(3) {
-	transform: matrix(0.7, -0.7, 0.7, 0.7, -42, 27.3);
+.nav-bar.active .nav-icon:nth-child(2) {
+	transform: rotate(45deg) translate3d(-10%, -250%, 0);
+}
+.nav-bar.active .nav-icon:nth-child(3) {
+	transform: rotate(-45deg) translate3d(3%, 67%, 0);
 }
