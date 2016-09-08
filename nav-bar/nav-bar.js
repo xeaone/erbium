@@ -109,7 +109,7 @@
 		width: 50px;
 		cursor: pointer;
 		position: relative;
-		display: inline-block;
+		display: block;
 	}
 	.nav-icon {
 		width: 100%;
