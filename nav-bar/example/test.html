@@ -1,0 +1,84 @@
+<style>
+	svg {
+		height: 70%;
+	}
+	svg * {
+		transition: all 1s ease;
+	}
+	.nav-icon {
+		fill: black;
+		transform-origin: 0 0 0;
+	}
+
+	.nav-icon:nth-child(1) {
+		fill: blue;
+		transform: matrix(0.7, 0.7, -0.7, 0.7, 27.3, 2.7);
+		/*transform: rotate(45deg) translate3d(20px, -17.5px, 0);*/
+	}
+	.nav-icon:nth-child(2) {
+		fill: green;
+		transform: matrix(0.7, 0.7, -0.7, 0.7, 50, -20);
+		/*transform: rotate(45deg) translate3d(20px, -50px, 0);*/
+	}
+	.nav-icon:nth-child(3) {
+		fill: purple;
+		transform: matrix(0.7, -0.7, 0.7, 0.7, -42, 27.3);
+		/*transform: rotate(-45deg) translate3d(-48.5px, -11px, 0);*/
+	}
+</style>
+
+<svg class="nav-bg" viewBox="0 0 100 100">
+	<g>
+		<path class="nav-icon" d="M0 10 h100 v15 h-100 z"/>
+		<path class="nav-icon" d="M0 42.5 h100 v15 h-100 z"/>
+		<path class="nav-icon" d="M0 75 h100 v15 h-100 z"/>
+	</g>
+	<g>
+		<rect fill="red" width="1px" height="100%" x="50%" />
+		<rect fill="red" width="100%" height="1px" y="50%"/>
+	</g>
+</svg>
+
+<!--
+
+<style>
+	svg {
+		width: 100%;
+	}
+	rect:nth-child(3) {
+		/*
+			viewbox/2 - self/2 = y
+			viewbox/2 - self/2 = x
+
+			if
+				transform-origin: 100px 100px 0;
+			then
+				transform: matrix(0.68, 0.68, -0.68, 0.68, 400, 400)
+		*/
+
+		/*
+			?? = y
+			viewbox/2 = x
+
+			if
+				transform-origin: 0 0 0;
+			then
+				matrix(0.7, 0.7, -0.7, 0.7, 500, 360)
+		*/
+
+		transform: matrix(0.7, 0.7, -0.7, 0.7, 500, 360);
+
+	}
+</style>
+
+<svg viewbox='0 0 1000 1000'>
+	<rect fill="lightgreen" width="100%" height="100%"/>
+	<rect fill="lightyellow" width='200' height="200" x="40%" y="40%"/>
+
+	<rect
+		fill="blue"
+		width='200' height='200'/>
+
+		<rect fill="red" width="1px" height="100%" x="50%" />
+		<rect fill="red" width="100%" height="1px" y="50%"/>
+</svg> -->
