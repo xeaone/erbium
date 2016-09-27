@@ -3,10 +3,10 @@
 <head>
 	<title>Nav-bar</title>
 
-	<script src="../nav-bar.js"></script>
-	<link rel="stylesheet" href="../nav-bar.css">
+	<!-- <script src="../nav-bar.js"></script> -->
+	<!-- <link rel="stylesheet" href="../nav-bar.css"> -->
 
-	<!-- <script src="../nav-bar.min.js"></script> -->
+	<script src="../nav-bar.min.js"></script>
 
 </head>
 <body>
@@ -14,21 +14,23 @@
 	<style>
 		* { margin: 0px; padding: 0px; }
 		hr { border: solid 5px black; }
+		a { text-decoration: none; }
 
+		.nav-bar {
+			color: white;
+		}
 		.nav-tool {
 			background: lightgreen;
 		}
-		.nav-list-first {
+		.nav-list-main {
 			background: lightpink;
 		}
-		.nav-list-all {
+		.nav-list-sub {
 			background: lightblue;
-		}
-		.nav-icon {
-			background: white;
 		}
 	</style>
 
+	<div><p>Should be nothing above me</p></div>
 	<hr>
 
 	<nav class="nav-bar">
@@ -42,11 +44,24 @@
 				<ul>
 					<li><a href="#!">Watch</a></li>
 					<li><a href="#!">Listen</a></li>
+					<li><a href="#!">1</a></li>
+					<li><a href="#!">2</a></li>
+					<li><a href="#!">3</a></li>
+					<li><a href="#!">4</a></li>
+					<li><a href="#!">5</a></li>
+					<li><a href="#!">6</a></li>
 					<li>
 						<a href="#!">Test</a>
 						<ul>
 							<li><a href="#!">one</a></li>
 							<li><a href="#!">two</a></li>
+							<li>
+								<a href="#!">Another Test</a>
+								<ul>
+									<li><a href="#!">Another one</a></li>
+									<li><a href="#!">Another two</a></li>
+								</ul>
+							</li>
 						</ul>
 					</li>
 				</ul>
@@ -55,6 +70,7 @@
 	</nav>
 
 	<hr>
+	<div><p>Should be over me.</p></div>
 
 </body>
 </html>
