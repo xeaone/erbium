@@ -180,7 +180,6 @@
 		*/
 		var eStyle = document.createElement('style');
 		var nStyle = document.createTextNode(sStyle);
-		eStyle.setAttribute('title', 'nav-bar');
 		eStyle.appendChild(nStyle);
 		document.head.appendChild(eStyle);
 
