@@ -1,6 +1,6 @@
 {
   "name": "erbium",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "Erbium - JavaScript Components",
   "main": "index.js",
   "scripts": {

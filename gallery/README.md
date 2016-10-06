@@ -2,7 +2,6 @@
 Simple image gallery.
 
 ##Usage
-- NPM: `npm install --save erbium`
 - Link: https://raw.githubusercontent.com/AlexanderElias/erbium/master/gallery/gallery.min.js
 
 ##Features
