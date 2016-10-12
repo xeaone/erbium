@@ -1,0 +1,68 @@
+<html>
+<head>
+	<title>Modal</title>
+	<link rel="stylesheet" href="./modal.css">
+	<script src="./modal.js"></script>
+</head>
+<body>
+
+	<style>
+	.modal input {
+		display: block;
+		margin: 8px auto;
+		padding: 8px 16px;
+		border-radius: 1px;
+		border: solid 1px rgba(0,0,0,0.1);
+	}
+	.modal input:not([type=submit]) {
+		min-width: 200px;
+	}
+	.modal input[type=submit] {
+		border: none;
+		cursor: pointer;
+		margin: 16px auto;
+		padding: 8px 32px;
+		box-shadow: 0px 3px 3px rgba(0,0,0,0.1);
+	}
+	.modal input[type=submit]:hover {
+		box-shadow: 0px 3px 3px rgba(0,0,0,0.2);
+	}
+	</style>
+
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+
+		var optionOne = {
+			repeat: 'once',
+			title: 'Title One',
+			description: 'Description One',
+			content: document.querySelector('.form')
+		};
+
+		var optionTwo = {
+			// repeat: 'each',
+			timeout: 1000,
+			title: 'Title Two',
+			description: 'Description One',
+			content: '<div>String Content</div>'
+		};
+
+		var one = Erbium.modal.create(optionOne);
+		var two = Erbium.modal.create(optionTwo);
+
+		one.toggle();
+
+	});
+	</script>
+
+	<form class="form" action="index.html" method="post">
+		<input type="text" name="name" placeholder="Name" required>
+		<input type="email" name="email" placeholder="Email" required>
+		<input type="tel" name="phone" placeholder="Phone (Optional)">
+		<input type="address" name="address" placeholder="Address (Optional)">
+		<input type="submit" value="Submit">
+	</form>
+
+
+</body>
+</html>
