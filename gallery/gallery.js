@@ -120,7 +120,7 @@
 
 		var xDown = null;
 
-		var l = gallery.children.length
+		var l = gallery.children.length;
 
 		var index = 0;
 		var first = 0;
