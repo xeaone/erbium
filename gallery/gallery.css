@@ -38,6 +38,7 @@
 	width: 100%;
 	border: none;
 	box-shadow: none;
+	pointer-events: none;
 }
 .gallery .icon {
 	cursor: pointer;

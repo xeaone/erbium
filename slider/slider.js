@@ -45,6 +45,8 @@
 		for (var i = 0, l= slider.children.length; i < l; i++) {
 			var slide = slider.children[i];
 
+			if (slide.nodeName === 'IMG') slide.style.pointerEvents = 'none';
+
 			if (i === index) {
 				slide.style.position = 'static';
 				slide.style.transform = 'translate3d(0,0,0)';

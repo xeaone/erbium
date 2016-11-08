@@ -41,6 +41,7 @@
 			padding: 0;
 			width: 100%;
 			border: none;
+			pointer-events: none;
 		}
 		.gallery .icon {
 			cursor: pointer;
