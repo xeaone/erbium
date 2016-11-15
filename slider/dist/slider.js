@@ -1,6 +1,11 @@
-(function() {
+(function () {
 	'use strict';
 
+	/*
+	title: slider
+	version: 1.0.2
+	author: alexander elias
+	*/
 	var MOUSE_OVER = false;
 	var TOUCHED = false;
 	var START_X = 0;
@@ -42,7 +47,7 @@
 		var index = slider.getAttribute('data-index');
 		index = index ? Number(index) : 0;
 
-		for (var i = 0, l= slider.children.length; i < l; i++) {
+		for (var i = 0, l = slider.children.length; i < l; i++) {
 			var slide = slider.children[i];
 
 			if (slide.nodeName === 'IMG') slide.style.pointerEvents = 'none';
@@ -102,7 +107,8 @@
 	document.addEventListener('DOMContentLoaded', function () {
 		var sliders = document.querySelectorAll('.slider');
 
-		sliders.forEach(function (slider) {
+		for (var i = 0, l = sliders.length; i < l; i++) {
+			var slider = sliders[i];
 
 			// init slider styles
 			slider.style.cursor = 'pointer';
@@ -130,7 +136,7 @@
 
 			slider.addEventListener('touchstart', touchStart);
 			slider.addEventListener('touchend', touchEnd);
-		});
+		}
 
 	});
 
