@@ -1,0 +1,27 @@
+body {
+	width: 100%;
+	height: 100%;
+}
+div {
+	padding: 8px;
+	background: gray;
+}
+span {
+	padding: 8px;
+	width: 200px;
+	height: 50px;
+	display: block;
+	background: lightgray;
+}
+.moveable {
+	z-index: 0;
+	cursor: move;
+	user-select: none;
+	position: absolute;
+	transition: box-shadow 300ms ease;
+	box-shadow: 0 3px 3px rgba(0,0,0,0.0);
+}
+.moveable:hover {
+	z-index: 1;
+	box-shadow: 0 3px 3px rgba(0,0,0,0.3);
+}

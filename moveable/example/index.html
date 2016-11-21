@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Moveable</title>
+	<link rel="stylesheet" href="index.css">
+	<script src="../dist/moveable.js"></script>
+</head>
+<body>
+
+	<div class="moveable">
+		<span>Moveable One</span>
+	</div>
+
+	<div class="moveable">
+		<span>Moveable Two</span>
+	</div>
+
+	<script>
+		var moveables = document.querySelectorAll('.moveable');
+
+		for (var i = 0; i < moveables.length; i++) {
+			Moveable.listener(moveables[i], 0, i*100);
+		}
+	</script>
+
+</body>
+</html>
