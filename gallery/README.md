@@ -10,13 +10,15 @@ Simple image gallery.
 
 ##Markup
 ````HTML
-<div class="gallery 1">
+<div class="e-gallery 1">
 	<a href="image-large.png">
 		<img src="image-small.png"/>
 	</a>
 </div>
+
 <hr>
-<div class="gallery 2">
+
+<div class="e-gallery 2">
 	<a href="image-large.png">
 		<img src="image-small.png"/>
 	</a>
