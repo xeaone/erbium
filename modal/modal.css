@@ -14,6 +14,9 @@
 
 	display: -ms-flexbox;
 	display: -webkit-box;
+	display: -webkit-flex;
+	display:-moz-flex;
+	display:-ms-flex;
 	display: flex;
 
 	-webkit-transition: background 600ms ease;
@@ -25,13 +28,21 @@
 	background: #FFF;
 	box-shadow: 0px 3px 3px rgba(0,0,0,0.1);
 
-	-ms-flex: 0 1 300px;
 	-webkit-box-flex: 0 1 300px;
+	-webkit-flex: 0 1 300px;
+	-moz-flex: 0 1 300px;
+	-ms-flex: 0 1 300px;
 	flex: 0 1 300px;
 
 	-ms-grid-row-align: center;
+	-webkit-flex-item-align: center;
+	-moz-flex-item-align: center;
 	-ms-flex-item-align: center;
-    align-self: center;
+	flex-item-align: center;
+
+	align-self: center;
+	-moz-align-self: center;
+	-webkit-align-self: center;
 
 	-webkit-transform: translate3d(0, -500%, 0);
     transform: translate3d(0, -500%, 0);

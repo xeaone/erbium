@@ -15,7 +15,7 @@
 		}
 	</style>
 
-	<div class="e-gallery">
+	<div class="gallery">
 		<a href="images/zero-500.png">
 			<img src="images/zero-150.png"/>
 		</a>
@@ -29,7 +29,7 @@
 
 	<hr>
 
-	<div class="e-gallery">
+	<div class="gallery">
 		<a href="images/zero-500.png">
 			<img src="images/zero-150.png"/>
 		</a>
@@ -40,3 +40,13 @@
 
 </body>
 </html>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+	var galleries = document.querySelectorAll('.gallery');
+
+	for (var i = 0, l = galleries.length; i < l; i++) {
+		window.erbium.gallery.create(galleries[i]);
+	}
+});
+</script>

@@ -1,5 +1,5 @@
 /*
-	version: 1.0.0
+	version: 1.0.1
 	title: erbium gallery
 	author: alexander elias
 */
@@ -11,7 +11,7 @@ var eStyle = document.createElement('style');
 eStyle.appendChild(nStyle);
 document.head.appendChild(eStyle);
 
-var CreateGallery = function (gallery) {
+function create (gallery) {
 	var viewer = document.createElement('div');
 	var container = document.createElement('div');
 	var image = document.createElement('img');
@@ -22,7 +22,6 @@ var CreateGallery = function (gallery) {
 	var arrowRightWrap = document.createElement('div');
 
 	var xDown = null;
-
 	var l = gallery.children.length;
 
 	var index = 0;
@@ -30,35 +29,40 @@ var CreateGallery = function (gallery) {
 	var last = l-1;
 	var images = [];
 
-	var handleActive = function () {
+	function handleClick (e) {
+		if (e.target === viewer) handleActive();
+		else if (e.target === closeIcon) handleActive();
+	}
+
+	function handleActive () {
 		var isAcive = gallery.classList.toggle('active');
 		if (isAcive) document.body.style.overflow = 'hidden';
 		else document.body.style.overflow = 'initial';
-	};
+	}
 
-	var handleRight = function () {
+	function handleRight () {
 		if (index < last) index++;
 		scrollImages();
-	};
+	}
 
-	var handleLeft = function () {
+	function handleLeft () {
 		if (index > first) index--;
 		scrollImages();
-	};
+	}
 
-	var scrollImages = function () {
+	function scrollImages () {
 		var x = index * 100;
 
 		images.forEach(function (item) {
 			item.style.transform = 'translate3d(-' + x + '%,0,0)';
 		});
-	};
+	}
 
-	var handleTouchStart = function (e) {
+	function handleTouchStart (e) {
 		xDown = e.touches[0].clientX;
-	};
+	}
 
-	var handleTouchMove = function (e) {
+	function handleTouchMove (e) {
 		if (!xDown) return;
 
 		var xUp = e.touches[0].clientX;
@@ -69,7 +73,9 @@ var CreateGallery = function (gallery) {
 		else handleLeft();
 
 		xDown = null;
-	};
+	}
+
+	gallery.classList.add('e-gallery');
 
 	viewer.className = 'viewer';
 	container.className = 'container';
@@ -103,10 +109,7 @@ var CreateGallery = function (gallery) {
 		container.appendChild(imageClone);
 	}
 
-	viewer.addEventListener('click', function (e) {
-		if (e.target === viewer) handleActive();
-		else if (e.target === closeIcon) handleActive();
-	});
+	viewer.addEventListener('click', handleClick);
 
 	arrowLeftWrap.addEventListener('click', handleLeft);
 	arrowRightWrap.addEventListener('click', handleRight);
@@ -120,12 +123,14 @@ var CreateGallery = function (gallery) {
 	viewer.appendChild(container);
 	viewer.appendChild(arrowRightWrap);
 	gallery.appendChild(viewer);
-};
+}
 
-document.addEventListener('DOMContentLoaded', function () {
-	var galleries = document.querySelectorAll('.e-gallery');
+if (!window.erbium) {
+	window.erbium = {};
+}
 
-	for (var i = 0, l = galleries.length; i < l; i++) {
-		CreateGallery(galleries[i]);
-	}
-});
+if (!window.erbium.gallery) {
+	window.erbium.gallery = {};
+}
+
+window.erbium.gallery.create = create;
