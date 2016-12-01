@@ -11,7 +11,7 @@ var eStyle = document.createElement('style');
 eStyle.appendChild(nStyle);
 document.head.appendChild(eStyle);
 
-function create (gallery) {
+function create (gallery, urls) {
 	var viewer = document.createElement('div');
 	var container = document.createElement('div');
 	var image = document.createElement('img');
@@ -22,11 +22,11 @@ function create (gallery) {
 	var arrowRightWrap = document.createElement('div');
 
 	var xDown = null;
-	var l = gallery.children.length;
+	// var l = gallery.children.length;
 
 	var index = 0;
 	var first = 0;
-	var last = l-1;
+	// var last = l-1;
 	var images = [];
 
 	function handleClick (e) {
@@ -85,15 +85,15 @@ function create (gallery) {
 	arrowLeftWrap.className = 'arrow-left-wrap icon';
 	arrowRightWrap.className = 'arrow-right-wrap icon';
 
-	for (var i = 0; i < l; i++) {
-		var anchorChild = gallery.children[i];
-		var imageChild = anchorChild.children[0];
-
+	for (var i = 0, l = urls.length; i < l; i++) {
 		var imageClone = image.cloneNode();
+		var url = urls[i];
 
-		anchorChild.setAttribute('data-i', i);
-		imageClone.setAttribute('alt', imageChild.src);
-		imageClone.setAttribute('src', anchorChild.href);
+		var alt = url.split('/').pop().replace(/(-)|(\.)/g, ' ');
+
+		imageClone.setAttribute('data-i', i);
+		imageClone.setAttribute('alt', url);
+		imageClone.setAttribute('src', url);
 
 		images.push(imageClone);
 
@@ -108,6 +108,30 @@ function create (gallery) {
 
 		container.appendChild(imageClone);
 	}
+
+	// for (var i = 0; i < l; i++) {
+	// 	var anchorChild = gallery.children[i];
+	// 	var imageChild = anchorChild.children[0];
+	//
+	// 	var imageClone = image.cloneNode();
+	//
+	// 	anchorChild.setAttribute('data-i', i);
+	// 	imageClone.setAttribute('alt', imageChild.src);
+	// 	imageClone.setAttribute('src', anchorChild.href);
+	//
+	// 	images.push(imageClone);
+	//
+	// 	anchorChild.addEventListener('click', function (e) {
+	// 		e.preventDefault();
+	//
+	// 		index = Number(e.target.parentNode.getAttribute('data-i'));
+	//
+	// 		scrollImages();
+	// 		handleActive();
+	// 	});
+	//
+	// 	container.appendChild(imageClone);
+	// }
 
 	viewer.addEventListener('click', handleClick);
 
