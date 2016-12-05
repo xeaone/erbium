@@ -16,27 +16,21 @@
 	</style>
 
 	<div class="gallery">
-		<a href="images/zero-500.png">
-			<img src="images/zero-150.png"/>
-		</a>
-		<a href="images/one-500.png">
-			<img src="images/one-150.png"/>
-		</a>
-		<a href="images/two-500.png">
-			<img src="images/two-150.png"/>
-		</a>
+		<img src="images/zero-150.png"/>
+		<img src="images/one-150.png"/>
+		<img src="images/two-150.png"/>
 	</div>
 
 	<hr>
 
-	<div class="gallery">
+	<!-- <div class="gallery"> -->
 		<!-- <a href="images/zero-500.png">
 			<img src="images/zero-150.png"/>
 		</a>
 		<a href="images/one-500.png">
 			<img src="images/one-150.png"/>
 		</a> -->
-	</div>
+	<!-- </div> -->
 
 </body>
 </html>
@@ -45,8 +39,10 @@
 document.addEventListener('DOMContentLoaded', function () {
 	var galleries = document.querySelectorAll('.gallery');
 
-	for (var i = 0, l = galleries.length; i < l; i++) {
-		window.erbium.gallery.create(galleries[i]);
-	}
+	var options = {};
+
+	// for (var i = 0, l = galleries.length; i < l; i++) {
+		window.erbium.gallery.create(galleries[0]);
+	// }
 });
 </script>
