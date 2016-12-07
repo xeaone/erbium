@@ -1,5 +1,5 @@
 /*
-	version: 1.0.2
+	version: 1.0.3
 	title: erbium gallery
 	author: alexander elias
 */
@@ -73,10 +73,16 @@ function create (eGallery, defaultItems, thumbnailItems) {
 		eContainer.setAttribute('data-c', current);
 
 		image.addEventListener('load', function () {
-			eContainer.style.height = image.height + 'px';
-			eContainer.style.width = image.width + 'px';
 			eSpinner.style.display = 'none';
-			image.style.opacity = '1';
+			this.style.opacity = '1';
+			this.style.maxWidth = this.naturalWidth + 'px';
+			this.style.maxHeight = this.naturalHeight + 'px';
+			this.removeEventListener('load', null);
+			if (this.naturalWidth >= this.naturalHeight) {
+				this.style.width = '100%';
+			} else {
+				this.style.height = '100%';
+			}
 		});
 	}
 
@@ -87,10 +93,10 @@ function create (eGallery, defaultItems, thumbnailItems) {
 			var image = eContainer.children[i];
 			var direction = i < current ? '-' : '+';
 			if (i === current) {
-				image.style.transform = 'translate3d(0,0,0)';
+				image.style.transform = 'translate(-50%,-50%)';
 			} else {
 				image.style.opacity = '0';
-				image.style.transform = 'translate3d(' + direction + '100%,0,0)';
+				image.style.transform = 'translate(' + direction + '100%,-50%)';
 			}
 		}
 	}

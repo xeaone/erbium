@@ -2,6 +2,9 @@
 	'use strict';
 
 	var sStyle = `
+.e-gallery {
+	color: white;
+}
 .e-gallery, .e-gallery div, .e-gallery img, .e-gallery a {
 	transition: all 300ms ease;
 }
@@ -59,21 +62,27 @@
 	align-self: center;
 	-webkit-align-self: center;
 
-	max-width: 85vw;
-	max-height: 85vh;
 	overflow: hidden;
+
+	width: 85vw;
+	height: 85vh;
 }
 .e-gallery .e-viewer .e-container {
+	width: 100%;
+	height: 100%;
 	position: relative;
 }
 .e-gallery .e-viewer .e-container-wrap .e-container img {
-	opacity: 0;
+	top: 50%;
+	left: 50%;
 	margin: 0;
 	padding: 0;
+	opacity: 0;
 	border: none;
+	max-width: none;
+	border-radius: 0;
+	max-height: none;
 	box-shadow: none;
-	vertical-align: top;
-	pointer-events: none;
 	position: absolute;
 }
 .e-gallery .e-close, .e-gallery .e-arrow-left-wrap, .e-gallery .e-arrow-right-wrap {
@@ -122,6 +131,7 @@
 	border-left: 15px solid currentColor;
 }
 .e-gallery .e-arrow-left-wrap, .e-gallery .e-arrow-right-wrap {
+	margin: 1%;
 	padding: 15px 20px;
 }
 .e-gallery .e-arrow-left-wrap {
@@ -165,7 +175,7 @@
 `;
 
 	/*
-		version: 1.0.1
+		version: 1.0.3
 		title: erbium gallery
 		author: alexander elias
 	*/
@@ -237,10 +247,16 @@
 			eContainer.setAttribute('data-c', current);
 
 			image.addEventListener('load', function () {
-				eContainer.style.height = image.height + 'px';
-				eContainer.style.width = image.width + 'px';
 				eSpinner.style.display = 'none';
-				image.style.opacity = '1';
+				this.style.opacity = '1';
+				this.style.maxWidth = this.naturalWidth + 'px';
+				this.style.maxHeight = this.naturalHeight + 'px';
+				this.removeEventListener('load', null);
+				if (this.naturalWidth >= this.naturalHeight) {
+					this.style.width = '100%';
+				} else {
+					this.style.height = '100%';
+				}
 			});
 		}
 
@@ -251,10 +267,10 @@
 				var image = eContainer.children[i];
 				var direction = i < current ? '-' : '+';
 				if (i === current) {
-					image.style.transform = 'translate3d(0,0,0)';
+					image.style.transform = 'translate(-50%,-50%)';
 				} else {
 					image.style.opacity = '0';
-					image.style.transform = 'translate3d(' + direction + '100%,0,0)';
+					image.style.transform = 'translate(' + direction + '100%,-50%)';
 				}
 			}
 		}
