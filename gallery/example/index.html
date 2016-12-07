@@ -2,7 +2,7 @@
 <head>
 	<title>Gallery</title>
 	<script src="../dist/gallery.js"></script>
-	<!-- <link rel="stylesheet" href="../src/ignore/gallery.css"> -->
+	<!-- <script src="../dist/gallery.min.js"></script> -->
 </head>
 <body>
 
@@ -15,34 +15,39 @@
 		}
 	</style>
 
-	<div class="gallery">
+	<div class="gallery-one">
 		<img src="images/zero-150.png"/>
 		<img src="images/one-150.png"/>
 		<img src="images/two-150.png"/>
 	</div>
-
 	<hr>
-
-	<!-- <div class="gallery"> -->
-		<!-- <a href="images/zero-500.png">
-			<img src="images/zero-150.png"/>
-		</a>
-		<a href="images/one-500.png">
-			<img src="images/one-150.png"/>
-		</a> -->
-	<!-- </div> -->
+	<div class="gallery-two"></div>
+	<hr>
+	<div class="gallery-three"></div>
 
 </body>
 </html>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-	var galleries = document.querySelectorAll('.gallery');
 
-	var options = {};
+	window.erbium.gallery.create('.gallery-one');
 
-	// for (var i = 0, l = galleries.length; i < l; i++) {
-		window.erbium.gallery.create(galleries[0]);
-	// }
+	var galleryTwo = document.querySelector('.gallery-two');
+	var imageOne = document.createElement('img');
+	var imageTwo = document.createElement('img');
+	var imageThree = document.createElement('img');
+	imageOne.src = 'images/zero-150.png';
+	imageTwo.src = 'images/one-150.png';
+	imageThree.src = 'images/two-150.png';
+	var images = [imageOne, imageTwo, imageThree];
+	window.erbium.gallery.create(galleryTwo, images);
+
+	var galleryThree = document.querySelector('.gallery-three');
+	var imageUrls = ['images/zero-500.png', 'images/one-500.png', 'images/two-500.png'];
+	var thumbnailItems = ['images/two-150.png', 'images/one-150.png', 'images/zero-150.png'];
+	window.erbium.gallery.create(galleryThree, imageUrls, thumbnailItems);
+
+
 });
 </script>
