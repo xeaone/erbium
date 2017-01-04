@@ -3,7 +3,7 @@
 
 	/*
 	title: slider
-	version: 1.0.2
+	version: 1.0.3
 	author: alexander elias
 	*/
 	var MOUSE_OVER = false;
@@ -111,6 +111,8 @@
 			var slider = sliders[i];
 
 			// init slider styles
+			slider.style.top = '0';
+			slider.style.left = '0';
 			slider.style.cursor = 'pointer';
 			slider.style.overflow = 'hidden';
 			slider.style.position = 'relative';
