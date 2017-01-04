@@ -3,7 +3,7 @@
 
 	/*
 	title: slider
-	version: 1.0.3
+	version: 1.0.4
 	author: alexander elias
 	*/
 	var MOUSE_OVER = false;
@@ -51,6 +51,9 @@
 			var slide = slider.children[i];
 
 			if (slide.nodeName === 'IMG') slide.style.pointerEvents = 'none';
+
+			slide.style.top = '0';
+			slide.style.left = '0';
 
 			if (i === index) {
 				slide.style.position = 'static';
@@ -111,8 +114,6 @@
 			var slider = sliders[i];
 
 			// init slider styles
-			slider.style.top = '0';
-			slider.style.left = '0';
 			slider.style.cursor = 'pointer';
 			slider.style.overflow = 'hidden';
 			slider.style.position = 'relative';
