@@ -10,9 +10,12 @@
 	transition: all 300ms ease-in-out;
 }
 .nav-bar a {
+	cursor: pointer;
 	padding: 24px 64px;
 	display: inline-block;
 	vertical-align: middle;
+	min-width: 100%;
+	box-sizing: border-box;
 }
 .nav-bar ul {
 	width: 100%;
