@@ -1,71 +1,84 @@
 /*
-title: slider
-version: 1.0.4
-author: alexander elias
+	@banner
+	title: slider
+	version: 1.0.5
+	author: alexander elias
 */
-var MOUSE_OVER = false;
-var TOUCHED = false;
-var START_X = 0;
-var END_X = 0;
 
-var gesture = function (e) {
-	if (END_X < START_X) {
-		e.currentTarget.setAttribute('data-direction', 'left');
-		changeSlide(e.currentTarget);
-	} else if (END_X > START_X) {
-		e.currentTarget.setAttribute('data-direction', 'right');
-		changeSlide(e.currentTarget);
+function overEvent (e) {
+	e.currentTarget.setAttribute('data-pause', '');
+}
+
+function outEvent (e) {
+	e.currentTarget.removeAttribute('data-pause', '');
+}
+
+function startEvent (e) {
+	var start = e.type === 'touchstart' ? e.changedTouches[0].screenX : e.screenX;
+	e.currentTarget.setAttribute('data-start', start);
+
+	if (e.type === 'touchstart') {
+		e.currentTarget.setAttribute('data-pause', '');
 	}
-};
+}
 
-var click = function (e) {
-	if (!TOUCHED) changeSlide(e.currentTarget);
-};
+function endEvent (e) {
+	var start = parseInt(e.currentTarget.getAttribute('data-start'));
+	var end = e.type === 'touchend' ? e.changedTouches[0].screenX : e.screenX;
+	move(e.currentTarget, start, end);
 
-var mouseOver = function () {
-	MOUSE_OVER = true;
-};
+	if (e.type === 'touchend') {
+		pause(e.currentTarget);
+	}
+}
 
-var mouseOut = function () {
-	MOUSE_OVER = false;
-};
+function pause (slider) {
+	if (!slider.hasAttribute('data-paused')) {
+		var interval = parseInt(slider.getAttribute('data-interval')) * 2;
 
-var touchStart = function (e) {
-	TOUCHED = true;
-	START_X = e.changedTouches[0].screenX;
-};
-
-var touchEnd = function (e) {
-	END_X = e.changedTouches[0].screenX;
-	gesture(e);
-};
-
-var setSlides = function (slider) {
-	var index = slider.getAttribute('data-index');
-	index = index ? Number(index) : 0;
-
-	for (var i = 0, l = slider.children.length; i < l; i++) {
-		var slide = slider.children[i];
-
-		if (slide.nodeName === 'IMG') slide.style.pointerEvents = 'none';
-
-		slide.style.top = '0';
-		slide.style.left = '0';
-
-		if (i === index) {
-			slide.style.position = 'static';
-			slide.style.transform = 'translate3d(0,0,0)';
-		} else if (i > index) {
-			slide.style.position = 'absolute';
-			slide.style.transform = 'translate3d(100vw,0,0)';
-		} else if (i < index) {
-			slide.style.position = 'absolute';
-			slide.style.transform = 'translate3d(-100vw,0,0)';
+		if (interval > 0) {
+			setTimeout(function (s) {
+				s.removeAttribute('data-pause');
+				s.removeAttribute('data-paused');
+			}, interval, slider);
 		}
-	}
-};
 
-var changeSlide = function (slider) {
+		slider.setAttribute('data-paused', '');
+	}
+}
+
+function move (slider, start, end) {
+	var first = 0;
+	var last = slider.children.length - 1;
+	var index = parseInt(slider.getAttribute('data-index'));
+
+	if ((index === last && end < start) || (index === first && end > start)) {
+		bounce(slider);
+	} else if (index <= last && end < start) {
+		slider.setAttribute('data-direction', 'left');
+		change(slider);
+	} else if (index >= first && end > start) {
+		slider.setAttribute('data-direction', 'right');
+		change(slider);
+	}
+
+}
+
+function bounce (slider) {
+	var direction = slider.getAttribute('data-direction');
+	var index = slider.getAttribute('data-index');
+	var x;
+
+	index = index ? parseInt(index) : 0;
+	x = direction === 'left' ? '-15vw' : '15vw';
+	slider.children[index].style.transform = 'translate3d(' + x + ',0,0)';
+
+	setTimeout(function () {
+		slider.children[index].style.transform = 'translate3d(0,0,0)';
+	}, 150);
+}
+
+function change (slider) {
 	var direction = slider.getAttribute('data-direction');
 	var index = slider.getAttribute('data-index');
 	var maxIndex = slider.children.length - 1;
@@ -74,7 +87,7 @@ var changeSlide = function (slider) {
 	var minIndex = 0;
 	var x = null;
 
-	index = index ? Number(index) : 0;
+	index = index ? parseInt(index) : 0;
 	direction = direction !== 'left' && direction !== 'right' ? direction = 'left' : direction;
 
 	if (direction === 'left' && index === maxIndex) direction = 'right';
@@ -102,40 +115,77 @@ var changeSlide = function (slider) {
 	oldSlide.style.transform = 'translate3d(' + x + ',0,0)';
 
 	slider.setAttribute('data-index', newIndex);
-};
+}
+
+function setupSlides (slider) {
+	var index = slider.getAttribute('data-index');
+	index = index ? parseInt(index) : 0;
+
+	for (var i = 0, l = slider.children.length; i < l; i++) {
+		var slide = slider.children[i];
+
+		if (slide.nodeName === 'IMG') slide.style.pointerEvents = 'none';
+
+		slide.style.top = '0';
+		slide.style.left = '0';
+
+		if (i === index) {
+			slide.style.position = 'static';
+			slide.style.transform = 'translate3d(0,0,0)';
+		} else if (i > index) {
+			slide.style.position = 'absolute';
+			slide.style.transform = 'translate3d(100vw,0,0)';
+		} else if (i < index) {
+			slide.style.position = 'absolute';
+			slide.style.transform = 'translate3d(-100vw,0,0)';
+		}
+	}
+}
+
 
 document.addEventListener('DOMContentLoaded', function () {
 	var sliders = document.querySelectorAll('.slider');
 
-	for (var i = 0, l = sliders.length; i < l; i++) {
-		var slider = sliders[i];
+	for (var i = 0, l = sliders.length, slider, interval; i < l; i++) {
+		slider = sliders[i];
 
-		// init slider styles
 		slider.style.cursor = 'pointer';
 		slider.style.overflow = 'hidden';
 		slider.style.position = 'relative';
 
-		// init slides
-		setSlides(slider);
+		setupSlides(slider);
 
-		var interval = slider.getAttribute('data-interval');
-		interval = interval ? Number(interval) : 0;
+		interval = slider.getAttribute('data-interval');
 
-		// interval change
-		if (interval > 0) {
-			setInterval(function () {
-				if (!MOUSE_OVER) changeSlide(slider);
-			}, interval);
+		if (interval === null || interval === undefined) {
+			slider.getAttribute('data-interval', 0);
+		} else {
+			interval = interval ? parseInt(interval) : 0;
 		}
 
-		// listener
-		slider.addEventListener('click', click);
+		if (interval > 0 && interval < 500) {
+			interval = 500;
+			slider.setAttribute('data-interval', interval);
+		}
 
-		slider.addEventListener('mouseout', mouseOut);
-		slider.addEventListener('mouseover', mouseOver);
+		if ('ontouchstart' in document) {
+			slider.addEventListener('touchstart', startEvent);
+			slider.addEventListener('touchend', endEvent);
+		} else {
+			slider.addEventListener('mouseout', outEvent);
+			slider.addEventListener('mouseover', overEvent);
+			slider.addEventListener('mousedown', startEvent);
+			slider.addEventListener('mouseup', endEvent);
+		}
 
-		slider.addEventListener('touchstart', touchStart);
-		slider.addEventListener('touchend', touchEnd);
+		if (interval > 0) {
+			setInterval(function (s) {
+				if (!s.hasAttribute('data-pause')) {
+					change(s);
+				}
+			}, interval, slider);
+		}
+
 	}
 
 });

@@ -4,6 +4,8 @@
   "description": "Erbium - JavaScript Components",
   "main": "index.js",
   "scripts": {
+	  "slider-b": "muleify pack slider/src slider/dist",
+	  "slider-m": "muleify pack -m slider/src/slider.b.js slider/dist/slider.min.js"
   },
   "repository": {
     "type": "git",
