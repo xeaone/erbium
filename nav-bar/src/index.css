@@ -1,6 +1,7 @@
 .nav-bar {
 	z-index: 1;
 	width: 100%;
+	display: block;
 	text-align: left;
 	position: relative;
 }
@@ -11,10 +12,10 @@
 }
 .nav-bar a {
 	cursor: pointer;
+	min-width: 100%;
 	padding: 24px 64px;
 	display: inline-block;
 	vertical-align: middle;
-	min-width: 100%;
 	box-sizing: border-box;
 }
 .nav-bar ul {
@@ -35,7 +36,7 @@
 .nav-list-sub {
 	left: 0;
     position: absolute;
-	max-height: 1000px; /* unactive transition*/
+	max-height: 1000px;
 }
 .nav-list-sub > li {
 	width: 100%;
@@ -49,7 +50,6 @@
 	padding: 24px 0;
 	text-transform: uppercase;
 }
-
 @media screen and (min-width: 940px) {
 	.nav-tool {
 		height: 0;
@@ -78,14 +78,13 @@
 		max-height: 0;
 	}
 	.nav-bar .unactive > li:not(.active) > a {
-		margin:0 !important;
-		height: 0 !important;
-		padding: 0 !important;
+		margin:0;
+		height: 0;
+		padding: 0;
 		touch-action: none;
     	pointer-events: none;
 	}
 }
-
 @media screen and (max-width: 940px) {
 	.nav-tool {
 		width: 100%;
@@ -116,7 +115,6 @@
 		transform: translate3d(0%,0%,0) scale3d(1,1,1);
 	}
 }
-
 .nav-icon-arrow-down {
 	width: 0;
 	height: 0;
@@ -145,13 +143,12 @@ li.active > a+ul > li > a > .nav-icon-arrow-down {
 li.active > a > .nav-icon-arrow-right {
 	transform: rotate(90deg);
 }
-
 .nav-icon-menu-wrap  {
-	height: 50px;
 	width: 50px;
+	height: 50px;
+	display: block;
 	cursor: pointer;
 	position: relative;
-	display: block;
 }
 .nav-icon-menu {
 	width: 100%;

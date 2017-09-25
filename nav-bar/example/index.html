@@ -2,17 +2,14 @@
 <html>
 <head>
 	<title>Nav-bar</title>
-	<script src="../dist/nav-bar.js"></script>
-</head>
-<body>
-
+	<script src="../dist/nav-bar.min.js" defer></script>
 	<style>
-		* { margin: 0px; padding: 0px; }
+		* { margin: 0; padding: 0; }
 		hr { border: solid 5px black; }
 		a { text-decoration: none; }
-
 		.nav-bar {
 			color: white;
+			display: none;
 		}
 		.nav-tool {
 			background: lightgreen;
@@ -24,6 +21,8 @@
 			background: lightblue;
 		}
 	</style>
+</head>
+<body>
 
 	<div><p>Should be nothing above me</p></div>
 	<hr>
