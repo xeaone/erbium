@@ -82,9 +82,8 @@ li.active > a > .nav-arrow-right {
 	icon
 */
 .nav-icon {
-	height: 3rem;
 	width: 3rem;
-	padding: 0.3rem;
+	height: 3rem;
 	cursor: pointer;
 	position: relative;
 }
