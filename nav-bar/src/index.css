@@ -36,10 +36,12 @@
 	width: 100%;
 }
 .nav-list-main {
+	z-index: 1;
 	display: inline-block;
 }
 .nav-list-sub {
 	left: 0;
+	z-index: 1;
     position: absolute;
 }
 .nav-list-sub > li {
