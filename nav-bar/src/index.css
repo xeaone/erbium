@@ -6,6 +6,8 @@
 	position: relative;
 }
 .nav-bar div, .nav-bar ul, .nav-bar li {
+	margin: 0;
+	padding: 0;
 	transition: transform 300ms ease;
 }
 .nav-bar a {
