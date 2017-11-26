@@ -1,7 +1,7 @@
 /*
 	@banner
 	title: nav-bar
-	version: 1.1.3
+	version: 1.1.5
 	license: MPL-2.0
 	author: Alexander Elias
 	email: alex.steven.elias@gmail.com

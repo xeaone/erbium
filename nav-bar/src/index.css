@@ -5,9 +5,11 @@
 	text-align: left;
 	position: relative;
 }
-.nav-bar div, .nav-bar ul, .nav-bar li {
+.nav-bar ul, .nav-bar li {
 	margin: 0;
 	padding: 0;
+}
+.nav-bar div, .nav-bar ul, .nav-bar li {
 	transition: transform 300ms ease;
 }
 .nav-bar a {
