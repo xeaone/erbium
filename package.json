@@ -1,36 +1,33 @@
 {
-  "name": "erbium",
-  "version": "1.5.4",
-  "description": "Erbium - JavaScript Components",
-  "main": "index.js",
-  "scripts": {
+	"name": "erbium",
+	"version": "1.6.0",
+	"description": "Erbium - JavaScript Components",
+	"main": "index.js",
+	"scripts": {
 
-    "overlay-s": "muleify -s overlay",
-    "overlay-b": "muleify -p overlay/src overlay/dst",
-    "overlay-w": "muleify -pw overlay/src overlay/dev",
+		"overlay-s": "muleify -s overlay",
+		"overlay-w": "muleify -pw overlay/src overlay/dev",
+		"overlay-b": "muleify -pmt overlay/src/overlay.js overlay/dst/overlay.min.js",
 
-    "slider-b": "muleify pack slider/src slider/dist",
-    "slider-m": "muleify pack -m slider/src/slider.b.js slider/dist/slider.min.js",
-    "nav-bar": "muleify pack -bm nav-bar/src/index.js nav-bar/dist/nav-bar.min.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AlexanderElias/erbium.git"
-  },
-  "keywords": [
-    "components",
-    "components",
-    "erbium",
-    "web",
-    "javascript"
-  ],
-  "author": "Alexander Elias",
-  "license": "MPL-2.0",
-  "bugs": {
-    "url": "https://github.com/AlexanderElias/erbium/issues"
-  },
-  "homepage": "https://github.com/AlexanderElias/erbium#readme",
-  "devDependencies": {
-    "muleify": "^3.0.7"
-  }
+		"slider-b": "muleify pack slider/src slider/dist",
+		"slider-m": "muleify pack -m slider/src/slider.b.js slider/dist/slider.min.js",
+		"nav-bar": "muleify pack -bm nav-bar/src/index.js nav-bar/dist/nav-bar.min.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/AlexanderElias/erbium.git"
+	},
+	"keywords": [
+		"components",
+		"components",
+		"erbium",
+		"web",
+		"javascript"
+	],
+	"author": "Alexander Elias",
+	"license": "MPL-2.0",
+	"bugs": {
+		"url": "https://github.com/AlexanderElias/erbium/issues"
+	},
+	"homepage": "https://github.com/AlexanderElias/erbium#readme"
 }
