@@ -6,7 +6,7 @@ const Fs = require('fs');
 const Read = Util.promisify(Fs.readFile);
 const Write = Util.promisify(Fs.writeFile);
 
-(async function() { try {
+(async function () {
 
 	const navBarDistPath = Path.join('nav-bar', 'dist', 'nav-bar.min.js');
 	const navBarJsPath = Path.join(__dirname, 'nav-bar', 'src', 'index.js');
@@ -26,4 +26,4 @@ const Write = Util.promisify(Fs.writeFile);
 		minify: true
 	});
 
-} catch (e) { console.error(e); } }());
+}()).catch(console.error);

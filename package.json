@@ -4,6 +4,11 @@
   "description": "Erbium - JavaScript Components",
   "main": "index.js",
   "scripts": {
+
+    "overlay-s": "muleify -s overlay",
+    "overlay-b": "muleify -p overlay/src overlay/dst",
+    "overlay-w": "muleify -pw overlay/src overlay/dev",
+
     "slider-b": "muleify pack slider/src slider/dist",
     "slider-m": "muleify pack -m slider/src/slider.b.js slider/dist/slider.min.js",
     "nav-bar": "muleify pack -bm nav-bar/src/index.js nav-bar/dist/nav-bar.min.js"
