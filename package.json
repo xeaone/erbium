@@ -1,13 +1,13 @@
 {
 	"name": "erbium",
-	"version": "1.6.0",
+	"version": "1.6.1",
 	"description": "Erbium - JavaScript Components",
 	"main": "index.js",
 	"scripts": {
 
 		"overlay-s": "muleify -s overlay",
 		"overlay-w": "muleify -pw overlay/src overlay/dev",
-		"overlay-b": "muleify -pmt overlay/src/overlay.js overlay/dst/overlay.min.js",
+		"overlay-b": "muleify -pmt overlay/src/overlay.js overlay/dst/overlay.min.js && node strip.js overlay/dst/overlay.min.js",
 
 		"slider-b": "muleify pack slider/src slider/dist",
 		"slider-m": "muleify pack -m slider/src/slider.b.js slider/dist/slider.min.js",

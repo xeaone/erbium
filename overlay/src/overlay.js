@@ -27,10 +27,10 @@
 		.e-overlay-content {
 			max-width: 90vw;
 			max-height: 90vh;
+			transform: translate(0, -100vh);
 		}
-		.e-overlay-wrap.active {
-			opacity: 1;
-			pointer-events: initial;
+		.e-overlay-open, .e-overlay-close {
+			display: inline-block;
 		}
 		.e-overlay-open-icon, .e-overlay-close-icon {
 			cursor: pointer;
@@ -39,10 +39,17 @@
 			position: relative;
 			margin: 0.3vh 0.3vw;
 			display: inline-block;
-			background-color: rgba(0, 0, 0, 0);
 		}
 		.e-overlay-open-icon:hover, .e-overlay-close-icon:hover {
 			background-color: rgba(0, 0, 0, 0.1);
+		}
+		.e-overlay-open-icon:active, .e-overlay-close-icon:active {
+			background-color: rgba(0, 0, 0, 0.3);
+		}
+		.e-overlay-close-icon {
+			top: 0;
+			right: 0;
+			position: absolute;
 		}
 		.e-overlay-open-icon:before, .e-overlay-open-icon:after {
 			content: '';
@@ -59,11 +66,6 @@
 			position: absolute;
 			border-left: 0.09rem solid currentColor;
 		}
-		.e-overlay-close-icon {
-			top: 0;
-			right: 0;
-			position: absolute;
-		}
 		.e-overlay-open-icon:before {
 			transform: rotate(0deg);
 		}
@@ -75,6 +77,13 @@
 		}
 		.e-overlay-close-icon:after {
 			transform: rotate(45deg);
+		}
+		.active .e-overlay-wrap {
+			opacity: 1;
+			pointer-events: initial;
+		}
+		.active .e-overlay-content {
+			transform: translate(0, 0);
 		}
 	`;
 
@@ -114,13 +123,15 @@
 			wrap.appendChild(close);
 		}
 
-		open.addEventListener('click', function (open, close, wrap, content) {
-			wrap.classList.add('active');
-		}.bind(null, open, close, wrap, content));
+		open.addEventListener('click', function (container) {
+			container.classList.add('active');
+			document.body.style.overflowY = 'hidden';
+		}.bind(null, container));
 
-		close.addEventListener('click', function (open, close, wrap, content) {
-			wrap.classList.remove('active');
-		}.bind(null, open, close, wrap, content));
+		close.addEventListener('click', function (container) {
+			container.classList.remove('active');
+			document.body.style.overflowY = 'initial';
+		}.bind(null, container));
 
 	}
 
