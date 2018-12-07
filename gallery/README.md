@@ -1,15 +1,12 @@
-#Gallery
+# Gallery
 Simple image gallery.
 
-##Usage
-- Link: https://raw.githubusercontent.com/AlexanderElias/erbium/master/gallery/gallery.min.js
-
-##Features
+## Features
 - Mobile touch capable.
 - Multiple galleries on the same page.
 
-##Markup
-``HTML
+## Markup
+```HTML
 <div class="gallery 1">
 	<img src="image.png"/>
 	<img src="image.png"/>
@@ -21,11 +18,11 @@ Simple image gallery.
 <div class="gallery 2"></div>
 ```
 
-##API
+## API
 
-###erbium.gallery.create(gallery, items, thumbnails)
+### erbium.gallery.create(gallery, items, thumbnails)
 
-####Parameters
+#### Parameters
 - `gallery` Html Element or query selector String **Required**
 - `items` Html Image array or url/path String array
 	- If `null` then `erbium.gallery.create` will use the `gallery` element children.
