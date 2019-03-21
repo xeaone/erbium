@@ -23,41 +23,42 @@ function create (eGallery, defaultItems, thumbnailItems) {
 	var eArrowRightWrap = document.createElement('div');
 
 	eGallery = typeof eGallery === 'string' ? document.querySelector(eGallery) : eGallery;
-	defaultItems = defaultItems || eGallery.children;
+	defaultItems = defaultItems || [];
+
+	defaultItems.push.apply(defaultItems, eGallery.children);
 
 	var xDown = null;
 	var l = defaultItems.length;
 	var last = l-1;
-	var isGalleryChildless = eGallery.children.length === 0;
+	// var isGalleryChildless = eGallery.children.length === 0;
 
-	function createImage (item, index) {
-		var alt = null;
-		var image = null;
+	function createImage (data) {
+	}
 
-		switch (item.constructor.name) {
+	function getData (data, index) {
+		var result = {};
+
+		switch (data.constructor.name) {
 			case 'String': {
-				image = document.createElement('img');
-				alt = item.split('/').pop().replace(/(-)|(_)|(\.\w+)/g, ' ');
-				image.setAttribute('alt', alt);
-				image.setAttribute('src', item);
-				image.setAttribute('data-i', index);
+				result.src = data;
+				result['data-i'] = index;
+				result.alt = data.split('/').pop().replace(/(-)|(_)|(\.\w+)/g, ' ');
 			}
 				break;
 			case 'Object': {
-				image = document.createElement('img');
-				image.setAttribute('alt', item.alt);
-				image.setAttribute('src', item.src);
-				image.setAttribute('data-i', index);
+				result.alt = data.alt;
+				result.src = data.src;
+				result.['data-i'] = index;
 			}
 				break;
-			case 'HTMLImageElement': {
-				item.setAttribute('data-i', index);
-				image = item.cloneNode();
-			}
-				break;
+			default:
+				var image = data.nodeName === 'IMG' ? data : data.querySelector('img');
+				result.src = image.src;
+				result.alt = image.alt;
+				result['data-i'] = index;
 		}
 
-		return image;
+		return result;
 	}
 
 	function getCurrent () {
@@ -149,11 +150,10 @@ function create (eGallery, defaultItems, thumbnailItems) {
 
 	for (var i = 0; i < l; i++) {
 		var defaultItem = defaultItems[i];
-		var clickableImage = defaultItem;
-		var galleryImage = null;
-		var src = null;
+		var galleryChild = null;
+		var data = getData(defaultItem, i);
 
-		var viewerImage = createImage(defaultItem, i);
+		// var viewerImage = createImage(defaultItem, i).cloneNode(true);
 		viewerImage.setAttribute('data-s', viewerImage.src);
 		viewerImage.removeAttribute('src');
 		eContainer.appendChild(viewerImage);
@@ -161,19 +161,18 @@ function create (eGallery, defaultItems, thumbnailItems) {
 		if (thumbnailItems) {
 			var thumbnaiItem = thumbnailItems[i];
 			if (thumbnaiItem) {
-				galleryImage = createImage(thumbnaiItem, i);
-				eGallery.appendChild(galleryImage);
-				clickableImage = galleryImage;
+				galleryChild = createImage(thumbnaiItem, i).cloneNode(true);
+				eGallery.appendChild(galleryChild);
 			}
-		} else if (!thumbnailItems && isGalleryChildless) {
-			galleryImage = viewerImage.cloneNode();
-			src = galleryImage.getAttribute('data-s');
-			galleryImage.setAttribute('src', src);
-			eGallery.appendChild(galleryImage);
-			clickableImage = galleryImage;
+		} else {
+			galleryChild = defaultItem.constructor === Object ||defaultItem.constructor === String ? viewerImage : defaultItem;
+			// galleryImage = defaultItem;
+			// src = galleryImage.getAttribute('data-s');
+			// galleryImage.setAttribute('src', src);
+			eGallery.appendChild(galleryChild);
 		}
 
-		clickableImage.addEventListener('click', function () {
+		galleryChild.addEventListener('click', function () {
 			var current = Number(this.getAttribute('data-i'));
 			eContainer.setAttribute('data-c', current);
 			scrollImages(current);

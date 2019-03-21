@@ -1,9 +1,11 @@
 <html>
 <head>
+	<base href="/example/">
 	<title>Gallery</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- <script src="../dist/gallery.js"></script> -->
-	<script src="../dist/gallery.min.js"></script>
+	<!-- <script src="../dist/gallery.min.js"></script> -->
+	<script src="../src/gallery.b.js" type="module"></script>
 </head>
 <body>
 
@@ -21,10 +23,15 @@
 		<img src="images/one-150.png"/>
 		<img src="images/two-150.png"/>
 	</div>
+
 	<hr>
 	<div class="gallery-two"></div>
+
 	<hr>
 	<div class="gallery-three"></div>
+
+	<hr>
+	<div class="gallery-four"></div>
 
 </body>
 </html>
@@ -34,21 +41,34 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	window.erbium.gallery.create('.gallery-one');
 
-	var galleryTwo = document.querySelector('.gallery-two');
+
 	var imageOne = document.createElement('img');
 	var imageTwo = document.createElement('img');
 	var imageThree = document.createElement('img');
+
 	imageOne.src = 'images/zero-150.png';
 	imageTwo.src = 'images/one-150.png';
 	imageThree.src = 'images/two-150.png';
-	var images = [imageOne, imageTwo, imageThree];
-	window.erbium.gallery.create(galleryTwo, images);
+
+	var galleryTwo = document.querySelector('.gallery-two');
+	window.erbium.gallery.create(galleryTwo, [
+		imageOne.cloneNode(true),
+		imageTwo.cloneNode(true),
+		imageThree.cloneNode(true)
+	]);
 
 	var galleryThree = document.querySelector('.gallery-three');
-	var imageUrls = ['images/zero-500.png', 'images/one-500.png', 'images/two-500.png'];
-	var thumbnailItems = ['images/two-150.png', 'images/one-150.png', 'images/zero-150.png'];
-	window.erbium.gallery.create(galleryThree, imageUrls, thumbnailItems);
+	window.erbium.gallery.create(galleryThree,
+		['images/zero-500.png', 'images/one-500.png', 'images/two-500.png'],
+		['images/two-150.png', 'images/one-150.png', 'images/zero-150.png']
+	);
 
+	var galleryFour = document.querySelector('.gallery-four');
+	var wrapOne = document.createElement('div');
+	var wrapTwo = document.createElement('div');
+	wrapOne.appendChild(imageOne.cloneNode(true));
+	wrapTwo.appendChild(imageTwo.cloneNode(true));
+	window.erbium.gallery.create(galleryFour, [wrapOne, wrapTwo]);
 
 });
 </script>
