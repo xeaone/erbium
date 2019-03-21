@@ -11,7 +11,12 @@ var eStyle = document.createElement('style');
 eStyle.appendChild(nStyle);
 document.head.appendChild(eStyle);
 
-function create (eGallery, defaultItems, thumbnailItems) {
+// function create (eGallery, defaultItems, thumbnailItems) {
+function create (options) {
+	var eGallery = options.target;
+	var defaultItems = options.links;
+	var thumbnailItems = options.thumbnails;
+
 	var eClose = document.createElement('div');
 	var eViewer = document.createElement('div');
 	var eSpinner = document.createElement('div');
@@ -48,7 +53,7 @@ function create (eGallery, defaultItems, thumbnailItems) {
 			case 'Object': {
 				result.alt = data.alt;
 				result.src = data.src;
-				result.['data-i'] = index;
+				result['data-i'] = index;
 			}
 				break;
 			default:
