@@ -4,18 +4,17 @@
 	author: alexander elias
 */
 
-import { sStyle } from './ignore/style.js';
+import sStyle from './ignore/style.js';
 
 var nStyle = document.createTextNode(sStyle);
 var eStyle = document.createElement('style');
 eStyle.appendChild(nStyle);
 document.head.appendChild(eStyle);
 
-// function create (eGallery, defaultItems, thumbnailItems) {
-function create (options) {
-	var eGallery = options.target;
-	var defaultItems = options.links;
-	var thumbnailItems = options.thumbnails;
+function create (option) {
+	option = option || {};
+
+	option.schema = option.schema || { name: 'img', attributes: [ { name: 'src', value: '$images' }] };
 
 	var eClose = document.createElement('div');
 	var eViewer = document.createElement('div');
@@ -27,18 +26,16 @@ function create (options) {
 	var eArrowLeftWrap = document.createElement('div');
 	var eArrowRightWrap = document.createElement('div');
 
-	eGallery = typeof eGallery === 'string' ? document.querySelector(eGallery) : eGallery;
-	defaultItems = defaultItems || [];
+	var eGallery = typeof option.target === 'string' ? document.querySelector(option.target) : option.target;
 
-	defaultItems.push.apply(defaultItems, eGallery.children);
+	var items = [];
+
+	items.push.apply(items, eGallery.children);
+	items.push.apply(items, option.images);
 
 	var xDown = null;
-	var l = defaultItems.length;
+	var l = items.length;
 	var last = l-1;
-	// var isGalleryChildless = eGallery.children.length === 0;
-
-	function createImage (data) {
-	}
 
 	function getData (data, index) {
 		var result = {};
@@ -67,7 +64,7 @@ function create (options) {
 	}
 
 	function getCurrent () {
-		return Number(eContainer.getAttribute('data-c'));
+		return Number(eContainer.getAttribute('data-i'));
 	}
 
 	function setCurrent (current) {
@@ -76,7 +73,7 @@ function create (options) {
 
 		eSpinner.style.display = 'block';
 		image.setAttribute('src', src);
-		eContainer.setAttribute('data-c', current);
+		eContainer.setAttribute('data-i', current);
 
 		image.addEventListener('load', function () {
 			eSpinner.style.display = 'none';
@@ -142,6 +139,51 @@ function create (options) {
 		xDown = null;
 	}
 
+	function parse (data, index) {
+		var node = document.createElement(data.name);
+
+		// var variables = option.variables;
+		var attributes = data.attributes;
+
+		if (attributes) {
+			for (var i = 0, l = attributes.length; i < l; i++) {
+				var attribute = attributes[i], value, name;
+
+				if ('value' in attribute) {
+					if (attribute.value.indexOf('$') === 0) {
+						var property = attribute.value.slice(1);
+						if (property in option) {
+							var variable = option[property];
+							value = Array.isArray(variable) ? variable[index] : variable;
+						} else {
+							value = undefined;
+						}
+					} else {
+						value = attribute.value;
+					}
+				} else {
+					value = '';
+				}
+
+				node.setAttribute(attribute.name, value);
+			}
+		}
+
+		if (node.nodeName === 'IMG' && option.alt !== false && node.hasAttribute('src') && !node.hasAttribute('alt')) {
+			var alt = node.src.split('/').pop().replace(/(-)|(_)|(\.\w+)/g, ' ');
+			node.setAttribute('alt', alt);
+		}
+
+		var children = data.children;
+		if (children) {
+			for (var i = 0; i < children.length; i++) {
+				node.appendChild(parse(children[i], index));
+			}
+		}
+
+		return node;
+	}
+
 	eClose.classList.add('e-close');
 	eViewer.classList.add('e-viewer');
 	eSpinner.classList.add('e-spinner');
@@ -154,35 +196,34 @@ function create (options) {
 	eArrowRightWrap.classList.add('e-arrow-right-wrap');
 
 	for (var i = 0; i < l; i++) {
-		var defaultItem = defaultItems[i];
-		var galleryChild = null;
-		var data = getData(defaultItem, i);
 
-		// var viewerImage = createImage(defaultItem, i).cloneNode(true);
-		viewerImage.setAttribute('data-s', viewerImage.src);
-		viewerImage.removeAttribute('src');
-		eContainer.appendChild(viewerImage);
+		var galleryChild =
+			items[i].constructor === String ||
+			items[i].constructor === Object ?
+			parse(option.schema, i) :
+			items[i];
 
-		if (thumbnailItems) {
-			var thumbnaiItem = thumbnailItems[i];
-			if (thumbnaiItem) {
-				galleryChild = createImage(thumbnaiItem, i).cloneNode(true);
-				eGallery.appendChild(galleryChild);
-			}
-		} else {
-			galleryChild = defaultItem.constructor === Object ||defaultItem.constructor === String ? viewerImage : defaultItem;
-			// galleryImage = defaultItem;
-			// src = galleryImage.getAttribute('data-s');
-			// galleryImage.setAttribute('src', src);
-			eGallery.appendChild(galleryChild);
-		}
+			console.log(galleryChild);
 
-		galleryChild.addEventListener('click', function () {
-			var current = Number(this.getAttribute('data-i'));
-			eContainer.setAttribute('data-c', current);
-			scrollImages(current);
+		var containerChild = galleryChild.nodeName === 'IMG' ? galleryChild.cloneNode(true) : galleryChild.querySelector('img').cloneNode(true);
+		containerChild.setAttribute('data-s', containerChild.src);
+		containerChild.removeAttribute('src');
+		eContainer.appendChild(containerChild);
+
+		// if (thumbnailItems) {
+		// 	var thumbnaiItem = thumbnailItems[i];
+		// 	if (thumbnaiItem) {
+		// 		galleryChild = createImage(thumbnaiItem, i).cloneNode(true);
+		// 		eGallery.appendChild(galleryChild);
+		// 	}
+
+		galleryChild.addEventListener('click', function (index) {
+			eContainer.setAttribute('data-i', index);
+			scrollImages(index);
 			handleActive();
-		});
+		}.bind(null, i));
+
+		eGallery.appendChild(galleryChild);
 	}
 
 	eArrowLeftWrap.appendChild(eArrowLeft);
@@ -198,8 +239,9 @@ function create (options) {
 	eClose.addEventListener('click', handleActive);
 	eArrowLeftWrap.addEventListener('click', handleLeft);
 	eArrowRightWrap.addEventListener('click', handleRight);
-	eContainerWrap.addEventListener('touchmove', handleTouchMove);
-	eContainerWrap.addEventListener('touchstart', handleTouchStart);
+
+	eViewer.addEventListener('touchmove', handleTouchMove);
+	eViewer.addEventListener('touchstart', handleTouchStart);
 }
 
 if (!window.erbium) window.erbium = {};

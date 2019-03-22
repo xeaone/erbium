@@ -1,4 +1,4 @@
-export var sStyle = `
+export default /*css*/`
 .e-gallery {
 	color: white;
 }
@@ -103,7 +103,7 @@ export var sStyle = `
 	height: 40px;
     position: absolute;
     transform: rotate(45deg);
-    border-left: 5px solid currentColor;
+    border-left: 3px solid currentColor;
 }
 .e-gallery .e-close:before {
     content: '';
@@ -112,24 +112,24 @@ export var sStyle = `
 	height: 40px;
     position: absolute;
     transform: rotate(-45deg);
-    border-left: 5px solid currentColor;
+    border-left: 3px solid currentColor;
 }
 .e-gallery .e-arrow-left, .e-gallery .e-arrow-right {
 	width: 0;
 	margin: auto;
 	cursor: pointer;
-	border-top: 15px solid transparent;
-	border-bottom: 15px solid transparent;
+	border-top: 0.7rem solid transparent;
+	border-bottom: 0.7rem solid transparent;
 }
 .e-gallery .e-arrow-left {
-	border-right: 15px solid currentColor;
+	border-right: 0.5rem solid currentColor;
 }
 .e-gallery .e-arrow-right {
-	border-left: 15px solid currentColor;
+	border-left: 0.5rem solid currentColor;
 }
 .e-gallery .e-arrow-left-wrap, .e-gallery .e-arrow-right-wrap {
-	margin: 1%;
-	padding: 15px 20px;
+	margin: 0 1vw;
+	padding: 1rem;
 }
 .e-gallery .e-arrow-left-wrap {
 	align-self: center;

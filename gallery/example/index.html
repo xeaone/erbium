@@ -52,28 +52,36 @@ document.addEventListener('DOMContentLoaded', function () {
 	var galleryTwo = document.querySelector('.gallery-two');
 	window.erbium.gallery.create({
 		target: galleryTwo,
-		links: [
-			imageOne.cloneNode(true),
-			imageTwo.cloneNode(true),
-			imageThree.cloneNode(true)
+		images: [
+			imageOne,
+			imageTwo,
+			imageThree
 		]
 	});
 
 	var galleryThree = document.querySelector('.gallery-three');
 	window.erbium.gallery.create({
 		target: galleryThree,
-		links: ['images/zero-500.png', 'images/one-500.png', 'images/two-500.png'],
-		thumbnails: ['images/two-150.png', 'images/one-150.png', 'images/zero-150.png']
+		images: ['images/zero-500.png', 'images/one-500.png', 'images/two-500.png']
 	});
 
-	var galleryFour = document.querySelector('.gallery-four');
-	var wrapOne = document.createElement('div');
-	var wrapTwo = document.createElement('div');
-	wrapOne.appendChild(imageOne.cloneNode(true));
-	wrapTwo.appendChild(imageTwo.cloneNode(true));
 	window.erbium.gallery.create({
-		target: galleryFour,
-		links: [wrapOne, wrapTwo]
+		target: '.gallery-four',
+		images: ['images/zero-150.png', 'images/one-150.png', 'images/two-150.png'],
+		schema: {
+			name: 'div',
+			children: [
+				{
+					name: 'img',
+					attributes: [
+						{
+							name: 'src',
+							value: '$images'
+						}
+					]
+				}
+			]
+		}
 	});
 
 });
