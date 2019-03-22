@@ -20,13 +20,14 @@ Simple image gallery.
 
 ## API
 
-### erbium.gallery.create(gallery, items, thumbnails)
+### erbium.gallery.create({ target: Element, images: Array , schema: Object });
 
 #### Parameters
-- `gallery` Html Element or query selector String **Required**
-- `items` Html Image array or url/path String array
+- `target` Html Element or query selector String **Required**
+- `images` Html Img array or url/path String array
 	- If `null` then `erbium.gallery.create` will use the `gallery` element children.
 	- Viewer images are loaded upon image click. Basically lazy load but smarter.
-- `thumbnails` Html Image array or url/path String array
+- `schema`
+<!-- - `thumbnails` Html Image array or url/path String array
 	- Only use if `items` are provided.
-	- Available so that the thumbnails or gallery preview images can be different sizes than the full size viewer images/items.
+	- Available so that the thumbnails or gallery preview images can be different sizes than the full size viewer images/items. -->

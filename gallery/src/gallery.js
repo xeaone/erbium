@@ -1,10 +1,10 @@
 /*
-	version: 1.0.3
+	version: 2.0.0
 	title: erbium gallery
 	author: alexander elias
 */
 
-import sStyle from './ignore/style.js';
+import sStyle from './style.js';
 
 var nStyle = document.createTextNode(sStyle);
 var eStyle = document.createElement('style');
@@ -202,8 +202,6 @@ function create (option) {
 			items[i].constructor === Object ?
 			parse(option.schema, i) :
 			items[i];
-
-			console.log(galleryChild);
 
 		var containerChild = galleryChild.nodeName === 'IMG' ? galleryChild.cloneNode(true) : galleryChild.querySelector('img').cloneNode(true);
 		containerChild.setAttribute('data-s', containerChild.src);
