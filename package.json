@@ -1,6 +1,6 @@
 {
 	"name": "erbium",
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"description": "Erbium - JavaScript Components",
 	"main": "index.js",
 	"scripts": {
@@ -14,11 +14,11 @@
 		"nav-bar": "muleify pack -bm nav-bar/src/index.js nav-bar/dist/nav-bar.min.js",
 
 		"gallery": "muleify -ptb gallery/src/gallery.js gallery/dst/gallery.js && muleify -ptbm gallery/src/gallery.js gallery/dst/gallery.min.js"
-		
+
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/AlexanderElias/erbium.git"
+		"url": "git+https://github.com/vokeio/erbium.git"
 	},
 	"keywords": [
 		"components",
@@ -30,7 +30,7 @@
 	"author": "Alexander Elias",
 	"license": "MPL-2.0",
 	"bugs": {
-		"url": "https://github.com/AlexanderElias/erbium/issues"
+		"url": "https://github.com/vokeio/erbium/issues"
 	},
-	"homepage": "https://github.com/AlexanderElias/erbium#readme"
+	"homepage": "https://github.com/vokeio/erbium#readme"
 }
