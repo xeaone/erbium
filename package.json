@@ -14,6 +14,7 @@
 		"nav-bar": "muleify pack -bm nav-bar/src/index.js nav-bar/dist/nav-bar.min.js",
 
 		"gallery": "muleify -ptb gallery/src/gallery.js gallery/dst/gallery.js && muleify -ptbm gallery/src/gallery.js gallery/dst/gallery.min.js"
+		
 	},
 	"repository": {
 		"type": "git",
